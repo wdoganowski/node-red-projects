@@ -1,0 +1,1 @@
+[{"id":"d7e579c7.281a88","type":"switch","name":"","property":"payload.ping","rules":[{"t":"gt","v":"0.15"},{"t":"else"}],"checkall":"true","outputs":2,"x":513,"y":311,"z":"eba9f89b.145608","wires":[["846f707d.7b909","98594d8a.67a6b"],["3341b7f7.ccbe48"]]}]

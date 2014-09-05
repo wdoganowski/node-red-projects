@@ -1,0 +1,1 @@
+[{"id":"7a1b7a66.85e484","type":"function","name":"","func":"var forecast = JSON.parse(msg.payload); \n\nvar formated_text = {\"payload\" : \"Currently in \" + forecast.name + \" \" + forecast.weather };\n\nreturn formated_text;","outputs":1,"x":647,"y":604,"z":"bc1e14f2.43e1e8","wires":[["e07fc968.1f8038"]]}]

@@ -1,19 +1,15 @@
 var net = require('net');
-require('buffer');
-
-var HOST = '192.168.0.194';
-var PORT = 1024;
-var PASSWORD = '1234';
-var CARD_ADDR = '00000000';
+//require('buffer');
+var credentials = require('./nexwell_cred.json');
 
 var seq = 0;
 var wlacz = 'wlacz';
 
 var client = new net.Socket();
 
-client.connect(PORT, HOST, function() {
+client.connect(credentials.port, credentials.host, function() {
 
-    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
+    console.log('CONNECTED TO: ' + credentials.host + ':' + credentials.port);
     // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client 
 
 });
@@ -57,7 +53,7 @@ client.on('data', function(data) {
         // MD5 HASH of password
         var crypto = require('crypto');
         var hash_ascii = new Buffer(17);
-        var hash = crypto.createHash('md5').update(PASSWORD).digest('hex');
+        var hash = crypto.createHash('md5').update(credentials.pass).digest('hex');
         hash_ascii = hex2a(hash);
         console.log('HASH: ' + hash);
         client.write(hash_ascii);
@@ -67,32 +63,32 @@ client.on('data', function(data) {
     } else if (data=='LOGIN OK') {
         console.log('hello');
         client.write('!\0');
-        client.write('@' + CARD_ADDR + ':system info Hello World!\0');
+        client.write('@' + credentials.addr + ':system info Hello World!\0');
     } else if (data=='CMD OK') {
         //console.log('SEQ : ' + seq);
         // Here we can send commands
         switch (seq) {
             case 0: 
                 seq = 1;
-                client.write('@' + CARD_ADDR + ':system C \'przek salon\' ?\0');
-                //client.write('@' + CARD_ADDR + ':ping\0');
+                client.write('@' + credentials.addr + ':system C \'przek salon\' ?\0');
+                //client.write('@' + credentials.addr + ':ping\0');
                 break;
             case 1:
                 seq = 0;
                 sleep(1000);
-                client.write('@' + CARD_ADDR + ':get\0');
+                client.write('@' + credentials.addr + ':get\0');
                 break;
         }
 
 
-    } else if (data.toString().substr(0,9)=='~' + CARD_ADDR) {
+    } else if (data.toString().substr(0,9)=='~' + credentials.addr) {
         console.log(data.toString().substr(9,data.length-9));
         
         //sleep(1000);
-        //client.write('@' + CARD_ADDR + ':system command ' + wlacz + ' \'przek salon\'\0');
+        //client.write('@' + credentials.addr + ':system command ' + wlacz + ' \'przek salon\'\0');
 
         seq = 1;
-        client.write('@' + CARD_ADDR + ':system C \'przek salon\' ?\0');
+        client.write('@' + credentials.addr + ':system C \'przek salon\' ?\0');
 
         if (wlacz == 'wlacz') wlacz = 'wylacz'; else wlacz = 'wlacz';
         // Here we can process answers

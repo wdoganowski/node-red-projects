@@ -30,6 +30,11 @@
         "label": "Sheet 9"
     },
     {
+        "type": "tab",
+        "id": "17b4cb2e.e84b35",
+        "label": "Sheet 5"
+    },
+    {
         "id": "befce5ec.410318",
         "type": "mqtt-broker",
         "broker": "test.mosquitto.org ",
@@ -553,14 +558,14 @@
     },
     {
         "id": "48fa2621.b705d8",
-        "type": "pushover",
-        "title": "",
-        "name": "",
-        "priority": 0,
+        "type": "unknown",
+        "name": "pushover",
         "x": 763,
         "y": 416,
         "z": "eba9f89b.145608",
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "5f0b067a.a0f4f8",
@@ -952,25 +957,106 @@
     },
     {
         "id": "a46f2131.5b90e",
-        "type": "digiRGB",
-        "name": "",
+        "type": "unknown",
+        "name": "digiRGB",
         "x": 720,
         "y": 196,
         "z": "1fe2ab2d.e01d55",
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "9b69c914.649638",
-        "type": "scanBLE",
-        "name": "",
-        "ble_name": "Pebble-LE 06C2",
-        "ble_uuid": "*",
+        "type": "unknown",
+        "name": "scanBLE",
         "x": 360,
         "y": 417,
         "z": "e8e25add.171da8",
         "wires": [
             [
                 "ceee99b8.311168"
+            ]
+        ]
+    },
+    {
+        "id": "1c4845f5.e3b7ba",
+        "type": "tcp out",
+        "host": "192.168.0.194",
+        "port": "1024",
+        "beserver": "client",
+        "base64": false,
+        "end": false,
+        "name": "Nexwell",
+        "x": 779,
+        "y": 259,
+        "z": "17b4cb2e.e84b35",
+        "wires": []
+    },
+    {
+        "id": "b5e4f41a.4a1b08",
+        "type": "tcp in",
+        "server": "client",
+        "host": "192.168.0.194",
+        "port": "1024",
+        "datamode": "stream",
+        "datatype": "buffer",
+        "newline": "",
+        "topic": "",
+        "name": "Nexwell",
+        "base64": false,
+        "x": 315,
+        "y": 186,
+        "z": "17b4cb2e.e84b35",
+        "wires": [
+            [
+                "2f46e620.d0b91a",
+                "863decd2.79c21",
+                "d54bc3f2.2ab44"
+            ]
+        ]
+    },
+    {
+        "id": "2f46e620.d0b91a",
+        "type": "debug",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 588,
+        "y": 143,
+        "z": "17b4cb2e.e84b35",
+        "wires": []
+    },
+    {
+        "id": "863decd2.79c21",
+        "type": "tcp request",
+        "server": "192.168.0.194",
+        "port": "1024",
+        "out": "time",
+        "splitc": "1000",
+        "name": "Read first line",
+        "x": 452,
+        "y": 362,
+        "z": "17b4cb2e.e84b35",
+        "wires": [
+            [
+                "2f46e620.d0b91a"
+            ]
+        ]
+    },
+    {
+        "id": "d54bc3f2.2ab44",
+        "type": "function",
+        "name": "",
+        "func": "msg.payload = msg.payload.toString()\nreturn msg;",
+        "outputs": 1,
+        "x": 484,
+        "y": 252,
+        "z": "17b4cb2e.e84b35",
+        "wires": [
+            [
+                "2f46e620.d0b91a"
             ]
         ]
     }

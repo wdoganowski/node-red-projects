@@ -1,0 +1,111 @@
+[
+    {
+        "type": "tab",
+        "id": "a0286902.5fd798",
+        "label": "Sheet 1"
+    },
+    {
+        "id": "94c717b0.6b38e8",
+        "type": "inject",
+        "name": "",
+        "topic": "",
+        "payload": "open",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 132,
+        "y": 32,
+        "z": "a0286902.5fd798",
+        "wires": [
+            [
+                "a99c3922.5663c8",
+                "a581ed1e.5a7e1"
+            ]
+        ]
+    },
+    {
+        "id": "a99c3922.5663c8",
+        "type": "function",
+        "name": "",
+        "func": "context.stop = context.stop || false;\n\nif (context.stop) return null;\n\nswitch (msg.payload) {\n\tcase \"open\":\n\t\tmsg.payload = \"welcome\";\n\t\tbreak;\n\tcase \"welcome\":\n\t\tmsg.payload = \"tx\";\n\t\tbreak;\n\tcase \"close\":\n\t\tcontext.stop = true;\n\t\treturn null;\n\tdefault:\n\t\n}\n\nreturn msg;\n",
+        "outputs": "1",
+        "x": 341,
+        "y": 45,
+        "z": "a0286902.5fd798",
+        "wires": [
+            [
+                "b1979c4f.4e686",
+                "5a81aca1.a57e54"
+            ]
+        ]
+    },
+    {
+        "id": "b1979c4f.4e686",
+        "type": "debug",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 704,
+        "y": 44,
+        "z": "a0286902.5fd798",
+        "wires": []
+    },
+    {
+        "id": "5a81aca1.a57e54",
+        "type": "delay",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 343,
+        "y": 176,
+        "z": "a0286902.5fd798",
+        "wires": [
+            [
+                "a99c3922.5663c8"
+            ]
+        ]
+    },
+    {
+        "id": "4365b635.bc9a48",
+        "type": "inject",
+        "name": "",
+        "topic": "",
+        "payload": "close",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 146,
+        "y": 145,
+        "z": "a0286902.5fd798",
+        "wires": [
+            [
+                "a99c3922.5663c8"
+            ]
+        ]
+    },
+    {
+        "id": "a581ed1e.5a7e1",
+        "type": "function",
+        "name": "",
+        "func": "var net = require('net');\n\nvar HOST = '192.168.0.194';\nvar PORT = 1024;\n\nvar client = new net.Socket();\nclient.connect(PORT, HOST, function() {\n\n    console.log('CONNECTED TO: ' + HOST + ':' + PORT);\n    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client \n    client.write('I am Chuck Norris!');\n\n});\n\n// Add a 'data' event handler for the client socket\n// data is what the server sent to this socket\nclient.on('data', function(data) {\n    \n    console.log('DATA: ' + data);\n    // Close the client socket completely\n    client.destroy();\n    \n});\n\n// Add a 'close' event handler for the client socket\nclient.on('close', function() {\n    console.log('Connection closed');\n});\nreturn msg;",
+        "outputs": 1,
+        "x": 350,
+        "y": 380,
+        "z": "a0286902.5fd798",
+        "wires": [
+            [
+                "b1979c4f.4e686"
+            ]
+        ]
+    }
+]

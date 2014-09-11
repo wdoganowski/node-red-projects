@@ -30,6 +30,11 @@
         "label": "Sheet 9"
     },
     {
+        "type": "tab",
+        "id": "f27c0d72.0d83f",
+        "label": "Sheet 5"
+    },
+    {
         "id": "befce5ec.410318",
         "type": "mqtt-broker",
         "broker": "test.mosquitto.org ",
@@ -973,5 +978,39 @@
                 "ceee99b8.311168"
             ]
         ]
+    },
+    {
+        "id": "78e5c3c6.871a3c",
+        "type": "sensorTag",
+        "name": "sensorTag",
+        "topic": "sensorTag",
+        "uuid": "",
+        "temperature": true,
+        "humidity": true,
+        "pressure": true,
+        "magnetometer": true,
+        "accelerometer": true,
+        "gyroscope": true,
+        "keys": true,
+        "x": 330,
+        "y": 250,
+        "z": "f27c0d72.0d83f",
+        "wires": [
+            [
+                "9561b3cb.6a9e5"
+            ]
+        ]
+    },
+    {
+        "id": "9561b3cb.6a9e5",
+        "type": "debug",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 672,
+        "y": 251,
+        "z": "f27c0d72.0d83f",
+        "wires": []
     }
 ]

@@ -5,6 +5,11 @@
         "label": "Sheet 1"
     },
     {
+        "type": "tab",
+        "id": "c28ff987.3d7008",
+        "label": "Sheet 2"
+    },
+    {
         "id": "94c717b0.6b38e8",
         "type": "inject",
         "name": "",
@@ -107,5 +112,35 @@
                 "b1979c4f.4e686"
             ]
         ]
+    },
+    {
+        "id": "a3f2b232.5c0d5",
+        "type": "nexo in",
+        "host": "192.168.0.194",
+        "port": 1024,
+        "address": "00000000",
+        "password": "password",
+        "name": "",
+        "topic": "",
+        "x": 229,
+        "y": 225,
+        "z": "c28ff987.3d7008",
+        "wires": [
+            [
+                "72f1c344.8d0e3c"
+            ]
+        ]
+    },
+    {
+        "id": "72f1c344.8d0e3c",
+        "type": "debug",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 570,
+        "y": 223,
+        "z": "c28ff987.3d7008",
+        "wires": []
     }
 ]

@@ -38,6 +38,8 @@ module.exports = function(RED) {
         msg.topic = this.topic;
         msg.payload = "Hello world !"
     
+        console.log(msg.payload);
+
         // send out the message to the rest of the workspace.
         this.send(msg);
     
